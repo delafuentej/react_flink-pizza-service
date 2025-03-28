@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Input } from "../../ui";
 
 
 const SearchOrder = () => {
@@ -20,12 +21,14 @@ const SearchOrder = () => {
     <form
         onSubmit={handleSubmit}
     >
-        <input 
-            placeholder="Search Order#"
+
+        <Input 
+            placeholder='Search Order#'
             value={query}
             onChange={(e)=> setQuery(e.target.value)}
+            className="bg-stone-100"
         />
-
+   
     </form>
   
         

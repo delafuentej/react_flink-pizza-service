@@ -4,6 +4,7 @@ import {
   Form, 
   redirect, 
   useActionData } from "react-router-dom";
+import { Button, Input } from "../../ui";
 import { createOrder } from "../../services";
 import { isValidPhone } from "../../utils/helpers";
 
@@ -51,52 +52,88 @@ function CreateOrder() {
   // this cart come from redux-state management
 
   return (
-    <div>
-      <h2>Ready to order? Let's go!</h2>
+    <div className='py-6 px-4'>
+      <h2 className="block text-xl font-semibold text-stone-500 mb-6">Ready to order? Let's go!</h2>
 
       <Form 
         method='POST'
         //action='/order/new'
         >
-        <div>
-          <label>First Name</label>
-          <input type="text" name="customer" required />
+        <div className="mb-5 flex flex-col gap-2 ">
+          <label
+          htmlFor='customer'
+          className="label"
+          >First Name</label>
+
+          <Input
+            type='text'
+            name='customer'
+            placeholder='Introduce your first name'
+          />
+         
         </div>
 
-        <div>
-          <label>Phone number</label>
+        <div className="mb-5 flex flex-col gap-2 ">
+          <label
+          htmlFor='phone'
+         className="label"
+          >Phone number</label>
           <div>
-            <input type="tel" name="phone" required />
+            <Input
+              type='tel'
+              name='phone'
+              placeholder='Introduce your phone number'
+            />
+          
           </div>
-          {formErrors?.phone && <p className={{style: {color: 'red'}}}>{formErrors.phone}</p>}
+          {formErrors?.phone && <p className='text-xs bg-red-100 text-red-500 rounded-md'>{formErrors.phone}</p>}
         </div>
 
-        <div>
-          <label>Address</label>
+        <div className="mb-5 flex flex-col gap-2 ">
+          <label
+          htmlFor="address"
+         className="label"
+          >Address</label>
           <div>
-            <input type="text" name="address" required />
+            <Input
+              type='text'
+              name='address'
+              placeholder= 'Please enter your full address for delivery'
+            
+            />
+            
           </div>
         </div>
 
-        <div>
+        <div flex flex-row space-x-2 gap-4>
           <input
             type="checkbox"
             name="priority"
             id="priority"
+            className="peer mr-3 mt-2 h-4 w-4 accent-red-500"
             // value={withPriority}
             // onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label htmlFor="priority">Want to yo give your order priority?</label>
+          
+          <label 
+           className="text-sm  font-medium text-stone-500 space-x-2 cursor-pointer"
+          htmlFor="priority">Want to yo give your order priority?</label>
+
+          <span className="text-red-500 font-medium opacity-0 peer-checked:opacity-100 transition-opacity">
+          Priority
+          </span>
         </div>
 
         <div>
           {/* creation of an invisible input to transmit the cart information as a string*/}
           <input type='hidden' name='cart' value={JSON.stringify(cart)}/>
-          <button
+
+          <Button 
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Placing Order' : 'Order now'}
-          </button>
+          </Button>
+
         </div>
       </Form>
     </div>

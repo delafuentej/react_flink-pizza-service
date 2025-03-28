@@ -2,7 +2,7 @@
 
 const User = () => {
   return (
-    <div className='text-sm font-semibold'>User Name</div>
+    <div className='hidden md:block text-sm font-semibold'>UserName</div>
   )
 }
 

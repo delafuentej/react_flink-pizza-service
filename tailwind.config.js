@@ -1,8 +1,12 @@
-module.exports = {
+//eslint-disabled-next-line
+
+export default {
     theme: {
-        colors: {
-            //configure your color palette here:
-            
-        }
-    }
-}
+      extend: {
+        fontFamily: {
+          roboto: ['Roboto', 'sans-serif'],
+        },
+      },
+    },
+    plugins: [],
+  };
