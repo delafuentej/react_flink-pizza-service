@@ -1,13 +1,25 @@
+import { useSelector } from 'react-redux';
+import { getCurrentQuantityById } from '../../cart';
+import {AddItemButton} from '../../cart';
+import {DeleteItemButton} from '../../cart';
+import UpdateItemQuantity from '../../cart/UpdateItemQuantity';
 import {formatCurrency} from '../../../utils/helpers';
-import { Button } from '../../../ui';
+
+
+
 
 function MenuItem({ pizza }) {
+
+  //const username = useSelector(state => state.user.username);
   
-  const {  name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+  const {id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+
+  const currentQuantityById = useSelector(getCurrentQuantityById(id));
+  const isInCart = currentQuantityById > 0;
+
 
   return (
     <li
-
     className='flex gap-4 py-2' 
     >
       <img 
@@ -26,9 +38,30 @@ function MenuItem({ pizza }) {
                         ${(soldOut) ? 'bg-red-500 w-1/3 uppercase' :'bg-green-600 w-1/3'}`}>
           {!soldOut ? <p>{formatCurrency(unitPrice)}</p> : <p>Sold out</p>}
 
-          <Button
-            className={`${!soldOut ? 'w-max bg-amber-400 hover:text-stone-700 absolute bottom-0 right-[-350px] md:right-[-475px] flex grow'  : 'hidden'}`}
-          >Add to Cart 🛒</Button>
+         
+          {(!soldOut && isInCart) ?  
+          <>
+          <UpdateItemQuantity pizzaId={id}
+            currentQuantity={currentQuantityById}
+            className='flex items-center w-max absolute bottom-15  text-stone-500 font-medium text-xl right-[-350px] md:right-[-475px] flex grow'
+          />
+
+          <DeleteItemButton 
+            className='w-max bg-red-500 hover:text-stone-700 absolute bottom-0 right-[-350px] md:right-[-475px] flex grow'
+            pizzaId={id}
+            /> 
+          </>
+           
+          : 
+          (!soldOut && !isInCart) ?
+            <AddItemButton 
+            pizza={pizza}
+            />
+            :
+            null
+          }
+
+          
          
         </div>
        

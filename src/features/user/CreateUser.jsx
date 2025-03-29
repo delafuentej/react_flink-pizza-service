@@ -1,11 +1,28 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateName } from './userSlice';// to dispatch action from store
 import { Button, Input } from '../../ui';
+
 
 function CreateUser() {
   const [username, setUsername] = useState('');
+  // dispatch action
+  const dispatch = useDispatch();
+  //
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
+    //here updating the store: good practices
+    if(!username) return;
+
+    dispatch(updateName(username))
+
+    setUsername('');
+
+    navigate('/menu');
+
   }
 
   return (
@@ -24,7 +41,9 @@ function CreateUser() {
 
       {username !== '' && (
         <div>
-          <Button className='mt-2'>
+          <Button 
+          handleClick={()=>{}}
+          className='mt-2'>
             Start ordering
           </Button>
         

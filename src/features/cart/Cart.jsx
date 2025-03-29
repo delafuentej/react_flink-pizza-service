@@ -1,33 +1,28 @@
+import { useSelector, useDispatch } from "react-redux";
+import { getCart, clearCart, getTotalItemsCart, deleteItem } from "./cartSlice";
+import { getUsername } from "../user";
 import { LinkButton, Button } from "../../ui";
 import CartItem from "./CartItem";
+import EmptyCart from "./EmptyCart";
 
-const fakeCart = [
-  {
-    pizzaId: 12,
-    name: 'Mediterranean',
-    quantity: 2,
-    unitPrice: 16,
-    totalPrice: 32,
-  },
-  {
-    pizzaId: 6,
-    name: 'Vegetale',
-    quantity: 1,
-    unitPrice: 13,
-    totalPrice: 13,
-  },
-  {
-    pizzaId: 11,
-    name: 'Spinach and Mushroom',
-    quantity: 1,
-    unitPrice: 15,
-    totalPrice: 15,
-  },
-];
 
 function Cart() {
-  const cart = fakeCart;
 
+  const cart = useSelector(getCart);
+  const username = useSelector(getUsername);
+  const totalItemsCart = useSelector(getTotalItemsCart);
+  const dispatch = useDispatch();
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  }
+
+  const handleDeleteItem = () => {
+    dispatch(deleteItem())
+  }
+
+  if(!cart.length) return <EmptyCart />;
+  
   return (
     <div className='px-4 py-6 '>
       <LinkButton
@@ -35,14 +30,13 @@ function Cart() {
           &larr; Back to menu
       </LinkButton>
 
-
-      <h2 className='mt-15 font-semibold text-xl'>Your cart, %NAME%</h2>
+{/*Your cart, {username}  */}
+      <h2 className='mt-15 font-semibold text-xl'>{(!totalItemsCart) ? `Your cart ist leer, ${username}` : `Your cart has ${totalItemsCart} ${totalItemsCart > 1 ? 'items': 'item'}, ${username}`}</h2>
 
       <ul className='mt-5 divide-y divide-orange-400 border-b-2 border-t-2 border-orange-600'>
-
         {cart.map((item) =>(
             <CartItem 
-            key={item.key}
+            key={item.pizzaId}
             item={item}
             />
         ))}
@@ -57,7 +51,9 @@ function Cart() {
         >
           Order pizzas
         </LinkButton>
-        <Button>Clear cart</Button>
+        <Button
+          handleClick={handleClearCart}
+        >Clear cart</Button>
        
       </div>
     </div>

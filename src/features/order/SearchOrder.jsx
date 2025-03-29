@@ -8,8 +8,6 @@ const SearchOrder = () => {
 
     const navigate = useNavigate();
 
-    console.log('navigate',navigate)
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!query) return;

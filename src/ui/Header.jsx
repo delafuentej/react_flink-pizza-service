@@ -1,5 +1,5 @@
 
-import { SearchOrder, User } from "../features";
+import { SearchOrder, Username } from "../features";
 import LinkButton from "./LinkButton";
 
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
           </LinkButton>
           <SearchOrder />
           
-         <User/>
+         <Username/>
     </header>
   
   )

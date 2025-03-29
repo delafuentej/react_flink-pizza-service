@@ -12,4 +12,4 @@ const LinkButton = ({children, to, className}) => {
   )
 }
 
-export default LinkButton
+export default LinkButton;

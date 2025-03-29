@@ -3,9 +3,11 @@ import { getMenu } from "../../services";
 import MenuItem from "./components/MenuItem";
 
 const Menu = () =>{
+
+
   // to retrieve  the data we need a custom hook: useLoaderData;
   const menu = useLoaderData();
-  console.log('menu',menu)
+ 
   return <ul className="divide-y divide-orange-300 px-2">
     {menu.map((pizza) => (
       <MenuItem 
