@@ -19,7 +19,7 @@ const Footer = () => {
           </p>
         )}
       </div>
-      <div className="pt-4 text-center border-t border-white text-white text-md">
+      <div className="pt-4 text-center border-t border-white text-white text-sm">
         &copy; {year} delafuentej. This in a project as part of The Ultimate React Course 2025 from Jonas Schmedt.
       </div>
 
